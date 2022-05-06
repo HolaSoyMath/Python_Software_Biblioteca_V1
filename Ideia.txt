@@ -1,0 +1,55 @@
+1. Criar livro
+    - Criar um gerador de código para cada livro
+    - Gerar uma lista de categorias a serem classificadas:
+        1. terror
+        2. comedia
+        3. narrativa
+        
+        Com a escolha do usuário, pegar as primeiras 3 letras para gerar um código e aleatorizar os próximos
+        EX:
+        TER125FGH --> Livro de terror
+        COM556BGH --> Livro de Comedia
+    - Usuário escolhe o nome do livro que será classificado
+    - Quantidade de livros que tem para serem emprestados
+
+2. Editar livro
+    - Editar nome
+    - Editar categoria
+        Ao editar a categoria terá que gerar um novo código para o livro
+    - Editar quantidade disponível
+
+3. Consulta Livro
+    - Verificar se o livro com aquele nome existe
+        - Mostrar o nome do livro
+        - Mostrar a categoria
+        - Mostrar o código
+        - Mostrar a quantidade
+        - Mostrar com que está esse livro
+        - PERGUNTAR SE QUER EMPRESTAR O LIVRO PARA UM USUÁRIO
+            - Mostrar a lista com os ID's
+            - Qual o ID do cara
+            - Realizar o procedimento de "Registrar o livro emprestado"
+
+4. Cadastrar novo usuário
+    - Registrar nome
+    - Registrar Sobrenome
+    - Dar um código para a pessoa na biblioteca
+
+5. Editar Usuário
+    - Mostrar uma lista dos usuários
+        - Ao escolher um usuário:
+          Editar nome
+          Editar SObrenome
+
+6. Lista de Usuários
+    - Mostrar lista com todos os ID's cadastrados
+    - Ao escolher um ID em específico:
+        - Mostrar todos os livros emprestados
+
+7. Registrar o livro emprestado
+    - Dar baixa no estoque
+    - Registrar o código desse livro anexado no ID
+
+8. Registrar devolução do livro
+    - Devolver o livro ao estoque
+    - Tirar o livro do nome do usuário
