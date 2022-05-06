@@ -1,3 +1,3 @@
-medo;COM222MBP;5
-Teste;ROM114CIG;1
-Medonho;COM062OFU;5
+Medonho;COM188IHX;5
+Click;SUS651XCK;6
+Olha o susto;ROM881UEK;2

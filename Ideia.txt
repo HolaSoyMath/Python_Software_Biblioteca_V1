@@ -53,3 +53,15 @@
 8. Registrar devolução do livro
     - Devolver o livro ao estoque
     - Tirar o livro do nome do usuário
+
+---------------------------------------------------------------------
+        MENU EM SI
+1. Registro Empréstimo
+2. Registro Devolução
+3. Novo Usuário
+4. Editar Usuário
+5. Lista Usuários
+6. Novo livro - OK
+7. Editar Livro
+8. Consultar Livro - Andamento
+0. Sair
