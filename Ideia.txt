@@ -62,6 +62,6 @@
 4. Editar Usuário
 5. Lista Usuários
 6. Novo livro - OK
-7. Editar Livro
-8. Consultar Livro - Andamento
+7. Editar Livro - Andamento
+8. Consultar Livro - OK
 0. Sair
