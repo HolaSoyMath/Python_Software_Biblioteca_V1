@@ -1,3 +1,4 @@
-Medonho;COM188IHX;5
-Click;SUS651XCK;6
-Olha o susto;ROM881UEK;2
+Deu medo;TER177FUQ;5
+Click;COM158PKS;7
+Olha o susto;SUS849ZLE;2
+Como se fosse a primeira vez;ROM716JHH;5

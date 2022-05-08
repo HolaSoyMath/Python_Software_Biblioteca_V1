@@ -58,10 +58,12 @@
         MENU EM SI
 1. Registro Empréstimo
 2. Registro Devolução
-3. Novo Usuário
+3. Novo Usuário - Andamento
 4. Editar Usuário
 5. Lista Usuários
 6. Novo livro - OK
-7. Editar Livro - Andamento
+7. Editar Livro - OK
 8. Consultar Livro - OK
 0. Sair
+
+-- COLOCAR UM MENU PARA ADICIONAR NOVA CATEGORIA --

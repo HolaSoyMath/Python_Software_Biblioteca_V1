@@ -30,5 +30,10 @@ def sub_menu(popcoes, pbutton0='Voltar'):
         tamanho = 60 - len(str(i + 1)) - 4
         print(f'|{i+1}. {opcao:<{tamanho}}|')
     sair(pbutton0)
-    opcao = int(input('Digite a opção escolhida: '))
+    while True:
+        opcao = int(input('Digite a opção escolhida: '))
+        if opcao >= 0 and opcao <= i+1:
+            break
+        else:
+            print('Insira um valor válido!')
     return opcao
