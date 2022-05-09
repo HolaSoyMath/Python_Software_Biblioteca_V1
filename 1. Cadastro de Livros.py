@@ -2,8 +2,8 @@ from menu import *
 from livros import *
 from basearquivos import *
 
-CATEGORIAS_LIVRO = ['Terror', 'Comédia', 'Suspense', 'Romântico']
-MENU_INICIAL = ['Registro Empréstimo','Registro Devolução', 'Novo Usuário', 'Editar Usuário', 'Lista Usuários', 'Novo livro', 'Editar Livro', 'Consultar Livro']
+CATEGORIAS_LIVRO = categoria()
+MENU_INICIAL = ['Registro Empréstimo','Registro Devolução', 'Novo Usuário', 'Editar Usuário', 'Lista Usuários', 'Novo livro', 'Editar Livro', 'Consultar Livro', 'Nova Categoria', 'Listar Categorias']
 quantidade = 0
 
 while True:
@@ -62,7 +62,7 @@ while True:
         while True:
             # Escrever o menu de opções de todos os livros na base de dados
             apagar_console()
-            tamanho = lerArquivo('Banco Livros.txt', 'Editar Livro', True) + 1
+            tamanho = lerArquivoLivros('Banco Livros.txt', 'Editar Livro', True) + 1
             sair()
             # Escolher o livro a ser editado
             resp = int(input('Qual o livro a ser editado? '))
@@ -93,12 +93,12 @@ while True:
             else:
                 print('Opção inválida, tente novamente!')
         
-    # Caso o usuário digite 8 o programa ira listartodos os livros presentes na base de dados
+    # Caso o usuário digite 8 o programa ira listar todos os livros presentes na base de dados
     elif escolha == 8:
         while True:
             apagar_console()
             # Ler todos os livros presentes na Base de Dados
-            lerArquivo('Banco Livros.txt', 'Livros Cadastrados')
+            lerArquivoLivros('Banco Livros.txt', 'Livros Cadastrados')
             linha()
             # Opção para voltar ao menu principal
             resp = int(input('Para voltar ao menu principal digite 0: '))
@@ -108,6 +108,49 @@ while True:
             else:
                 print('Opção inválida, tente novamente!')
 
+    # Caso o usuário digite 9 o programa ira adicionar uma nova categoria de livros
+    elif escolha == 9:
+        while True:
+            apagar_console()
+            # Indicar a ação a ser feita no cabeçalho
+            cabecalho('Adicionar categoria', 'Registrar nova categoria de livros')
+            resp = str(input('Qual o nome da nova categoria? (Digite "0" para retornar ao menu anterior) ')).strip().capitalize()
+            # Verificar se a resposta é um valor numerico
+            if resp.isnumeric() == True:
+                if float(resp) == 0.0:
+                    break
+                else:
+                    continue
+            # Verificar se o usuário quer voltar ao menu anterior
+            elif resp == 'Voltar':
+                break
+            # Adicionar a categoria informada anteriormente no arquivo Categorias.txt
+            else:
+                adicionar_categoria(resp)
+                print(f'A categoria \033[32m{resp}\033[m foi adicionada com sucesso!')
+            # Verificar se o usuário deseja adicionar outra categoria
+            while True:
+                resp = str(input('Deseja registrar uma nova categoria? [S/N] ')).strip().capitalize()[0]
+                if resp not in 'SN':
+                    continue
+                else:
+                    break
+            if resp == 'N':
+                break
+        # Atualizar a lista de Categorias presentes no sistema
+        CATEGORIAS_LIVRO = categoria()
+    
+    # Caso o usuário digite 10 o programa listará todas as categorias que tem cadastro
+    elif escolha == 10:
+        apagar_console()
+        while True:
+            cabecalho('Categorias', 'Lista de todas as categorias cadastradas')
+            sub_menu(CATEGORIAS_LIVRO,pindice=False)
+            resp = int(input('Digite 0 para voltar ao menu principal: '))
+            if resp == 0:
+                break
+            else:
+                print('Opção inválida. Tente novamente!')
         
 print('Programa encerrado!')
 print('Obrigado e volte sempre!')

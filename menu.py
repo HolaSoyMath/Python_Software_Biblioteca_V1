@@ -1,12 +1,12 @@
 import os
 
 def linha():
-    print('-' * 60)
+    print('-' * 120)
 
 def sair(popcao='Voltar'):
     """Indicar o que irá aparecer ao lado do submenu opção 0.
     param opcao --> Indicará a frase ao lado da opção 0 (Padrão: Voltar)"""
-    print(f'|0. {popcao:<55}|')
+    print(f'|0 . {popcao:<114}|')
     linha()
 
 def apagar_console():
@@ -17,23 +17,27 @@ def cabecalho(ptitulo, psubtitulo=''):
     param titulo --> Nome que aparecerá no título do cabeçalho
     param subtitulo --> Frase que aparecerá abaixo do título"""
     linha()
-    print(f'|{ptitulo.center(58)}|')
+    print(f'|{ptitulo.center(118)}|')
     if psubtitulo != '':
-        print(f'|{psubtitulo.center(58)}|')
+        print(f'|{psubtitulo.center(118)}|')
     linha()
 
-def sub_menu(popcoes, pbutton0='Voltar'):
+def sub_menu(popcoes, pbutton0='Voltar', pindice=True):
     """Indicar os nomes que aparecerão em forma de lista no menu a ser utilizado pelo usuário.\n
     param opcoes --> Todos os sub-menus que aparecerão. (OBS: Para mais de um item, utilizar uma lista com os nomes)\n
-    param button0 --> O que aparecerá no submenu ao lado da opção 0."""
+    param button0 --> O que aparecerá no submenu ao lado da opção 0. (Padrão: 0. Voltar)\n
+    param indice --> Mostrar indice dos numeros. (Padrão: True)"""
     for i, opcao in enumerate(popcoes):
-        tamanho = 60 - len(str(i + 1)) - 4
-        print(f'|{i+1}. {opcao:<{tamanho}}|')
-    sair(pbutton0)
-    while True:
-        opcao = int(input('Digite a opção escolhida: '))
-        if opcao >= 0 and opcao <= i+1:
-            break
+        if pindice == True:
+            print(f'|{i+1:<2}. {opcao:<114}|')
         else:
-            print('Insira um valor válido!')
-    return opcao
+            print(f'|{opcao:<118}|')
+    sair(pbutton0)
+    if pindice == True:
+        while True:
+            opcao = int(input('Digite a opção escolhida: '))
+            if opcao >= 0 and opcao <= i+1:
+                break
+            else:
+                print('Insira um valor válido!')
+        return opcao

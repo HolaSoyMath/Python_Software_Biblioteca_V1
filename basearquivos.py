@@ -19,8 +19,8 @@ def criarArquivo(nome):
     else:
         print(f'Arquivo {nome} criado com sucesso!')
         
-def lerArquivo(pnome, pcabecalho, pretorno=False):
-    """Mostra todos os itens pertencentes ao Banco de Dados escolhido.\n
+def lerArquivoLivros(pnome, pcabecalho, pretorno=False):
+    """Mostra todos os itens pertencentes ao Banco de Dados dos Livros.\n
     param nome --> Nome do arquivo a ser aberto.\n
     param cabecalho --> Nome que aparecerá no cabeçalho ao verificar todos os itens.
     param retorno --> Sinalizar se precisa que retorne o número de linhas totais (Padrão é False)"""
@@ -30,12 +30,12 @@ def lerArquivo(pnome, pcabecalho, pretorno=False):
         print('Erro ao ler o arquivo!')
     else:
         cabecalho(pcabecalho)
-        print(f'|{"ID":<3}{"Nome do Livro":^35}{"Cód. Livro":^15}{"Qntd.":>5}|')
+        print(f'|{"ID":^3}{"Nome do Livro":^95}{"Cód. Livro":^15}{"Qntd.":>5}|')
         i = None
         for i, linha in enumerate(a):
             linha = linha.replace('\n','')
             dado = linha.split(';')
-            print(f'|{i + 1:<3}. {dado[0]:^35}{dado[1]:<13}{dado[2]:^5}|')
+            print(f'|{i + 1:<3}. {dado[0]:^95}{dado[1]:<13}{dado[2]:^5}|')
         if pretorno == True:
             a.close()
             i = -1 if i is None else i
@@ -80,3 +80,23 @@ def alterar_arquivo(pescolha, pindice, parquivo, plistaarquivo=''):
             else:
                 arquivo.write(linha + '\n')
         arquivo.write('\n')
+        
+def categoria():
+    # Gera uma lista com todas as categorias no arquivo
+    """Gera uma lista com todas as categorias existentes no arquivo Categorias.txt"""
+    categorias = []
+    with open('Categorias.txt','r', encoding='utf-8') as arquivo:
+        for i, linha in enumerate(arquivo):
+            linha = linha.replace('\n', '')
+            categorias.append(linha)
+    return categorias
+
+def adicionar_categoria(pnovacat):
+    """Registra uma nova categoria no arquivo Categorias.txt\n
+    param novacat --> Qual o nome da nova categoria a ser registrada."""
+    categorias = categoria()
+    categorias.append(pnovacat)
+    with open('Categorias.txt','w', encoding='utf-8') as arquivo:
+        for linha in categorias:
+            arquivo.write(linha)
+            arquivo.write('\n')

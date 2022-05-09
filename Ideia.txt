@@ -64,5 +64,6 @@
 6. Novo livro - OK
 7. Editar Livro - OK
 8. Consultar Livro - OK
-9. Nova Categoria - Andamento
+9. Nova Categoria - OK
+10. Listar categorias - OK
 0. Sair
