@@ -56,11 +56,12 @@
 
 ---------------------------------------------------------------------
         MENU EM SI
-1. Registro Empréstimo
-2. Registro Devolução
-3. Novo Usuário
-4. Editar Usuário
-5. Lista Usuários
+1. Registro Empréstimo - Andamento
+2. Registro Devolução - Aguardando andamento
+3. Livros emprestados para cada usuário - Aguardamento andamento
+3. Novo Usuário - OK
+4. Editar Usuário - OK
+5. Lista Usuários - OK
 6. Novo livro - OK
 7. Editar Livro - OK
 8. Consultar Livro - OK

@@ -22,21 +22,28 @@ def criarArquivo(nome):
 def lerArquivoLivros(pnome, pcabecalho, pretorno=False):
     """Mostra todos os itens pertencentes ao Banco de Dados dos Livros.\n
     param nome --> Nome do arquivo a ser aberto.\n
-    param cabecalho --> Nome que aparecerá no cabeçalho ao verificar todos os itens.
+    param cabecalho --> Nome que aparecerá no cabeçalho ao verificar todos os itens.\n
     param retorno --> Sinalizar se precisa que retorne o número de linhas totais (Padrão é False)"""
     try:
+        # ABrir o arquivo escolhido
         a = open(pnome, 'rt')
     except:
+        # Caso nao consiga abrir, mostrar um erro
         print('Erro ao ler o arquivo!')
     else:
+        # Mostrar cabeçalho
         cabecalho(pcabecalho)
+        # No submenu, colocar as categorias de cada coluna
         print(f'|{"ID":^3}{"Nome do Livro":^95}{"Cód. Livro":^15}{"Qntd.":>5}|')
         i = None
         for i, linha in enumerate(a):
+            # Para cada linha no arquivo, criar uma lista
             linha = linha.replace('\n','')
             dado = linha.split(';')
+            # Printar a lista separada no terminal
             print(f'|{i + 1:<3}. {dado[0]:^95}{dado[1]:<13}{dado[2]:^5}|')
         if pretorno == True:
+            # Retornar o numero total de linahs presentes no arquivo
             a.close()
             i = -1 if i is None else i
             return i
