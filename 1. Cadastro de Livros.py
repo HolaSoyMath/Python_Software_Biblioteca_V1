@@ -15,7 +15,7 @@ while True:
     escolha = sub_menu(MENU_INICIAL, 'Sair')
     
     # Caso o usuário digite 0 o programa é encerrado
-    if escolha == 0:
+    if escolha == 0: # Encerrar programa
         break
     
     # Caso o usuário digite 1 o programa irá colocar um novo empréstimo para o usuário
@@ -33,53 +33,77 @@ while True:
             while True:
                 apagar_console()
                 cabecalho('Identificar usuário')
-                print_usuarios(True)
+                tamanho = print_usuarios(True, True)
                 if resp == 0:
                     # Voltar ao menu principal
                     break
                 elif resp == 1:
-                    # Identificar pelo ID
-                    id_user = int(input('Qual o ID do usuário? '))
+                    # Identificar usuário pelo ID
+                    while True:
+                        id_user = int(input('Qual o ID do usuário? '))
+                        if id_user >= 0 and id_user <= tamanho:
+                            break
+                        else:
+                            print('Opção inválida, tente novamente!')
+                    break
                 elif resp == 2:
-                    # Identificar pelo Codigo
-                    id_user = identificar_user_codigo()
-                    if id_user == 0:
-                        break
+                    while True:
+                        # Identificar usuário pelo Codigo
+                        id_user = identificar_ID_via_codigo('Users.txt', 'Usuário')
+                        if id_user == -1:
+                            print('Opção inválida, tente novamente!')
+                        else:
+                            break
+                    break
                 else:
                     print('Opção Inválida, tente novamente!')
-            # Caso digite 0 em algum moneto do processo, volta ao Menu Principal
-            if resp == 0 or id_user == 0:
+            # Caso digite 0 em algum momento do processo, volta ao Menu Principal
+            if id_user == 0:
                 break
             
             ########## IDENTIFICAÇÃO DO LIVRO
             # Como o livro será identificado ?
+            apagar_console()
             cabecalho('Como deseja identificar o livro ?')
             resp = sub_menu(['Via ID do livro', 'Via código do livro'])
             apagar_console()
-            lerArquivoLivros('teste.txt', 'Livros Cadastrados')
-            linha()
+            tamanho = lerArquivoLivros('teste.txt', 'Livros Cadastrados', True)
+            sair()
             if resp == 0:
                 break
             elif resp == 1: # Empréstimo via ID
-                # Retirar da base dos livros 1 unidade disponível
-                resp = int(input('Qual o ID do livro a ser emprestado? '))
-                lista_atualizada = emp_dev_ID(resp)
-                atualizar_arquivo_emprestimo('teste.txt', lista_atualizada)
-                # Sinalizar que o registro foi feito
-                print('\033[32mRegistro efetuado!\033[m')
+                while True:
+                    id_livro = int(input('Qual o ID do livro a ser emprestado? '))
+                    if id_livro >= 0 and id_livro <= tamanho + 1:
+                        break
+                    else:
+                        print('Opção inválida, tente novamente!')
             elif resp == 2: # Empréstimo via Código
-                
-                
-                
-                
-                
-                
-                
-                
-                pass
+                while True:
+                    id_livro = identificar_ID_via_codigo('Banco Livros.txt', 'Livro')
+                    if id_livro == -1:
+                        print('Opção inválida, tente novamente!')
+                    else:
+                        break
             else:
                 print('Opção inválida, tente novamente!')
                 continue
+            if id_livro == 0:
+                break
+            else:
+                # Registrar empréstimo no Banco de Dados
+                resp = registrar_emprestimo(id_user, id_livro)
+                if resp == 1:
+                    print('\033[1;31mO usuário já tem o livro emprestado em seu nome.')
+                    print('Empréstimo bloqueado!\033[m')
+                elif resp == 0:
+                    pass
+                else:
+                    # Retirar da base dos livros 1 unidade disponível
+                    lista_atualizada = emp_dev_ID(id_livro)
+                    atualizar_arquivo_emprestimo('teste.txt', lista_atualizada)
+                    # Sinalizar que o registro foi feito
+                    print('\033[32mRegistro efetuado!\033[m')
             
             # Emprestar novo livro ?
             while True:

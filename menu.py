@@ -6,7 +6,7 @@ def linha():
 def sair(popcao='Voltar'):
     """Indicar o que irá aparecer ao lado do submenu opção 0.
     param opcao --> Indicará a frase ao lado da opção 0 (Padrão: Voltar)"""
-    print(f'|0 . {popcao:<114}|')
+    print(f'|\033[31m0 . {popcao:<114}\033[m|')
     linha()
 
 def apagar_console():
