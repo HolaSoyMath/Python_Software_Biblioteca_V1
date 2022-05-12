@@ -1,6 +1,6 @@
 
 
-def lista_do_arquivo(parquivo, psplit=True):
+def lista_do_arquivo(parquivo):
     '''Retorna o valor em formato de lista, todas as linhas do arquivo selecionado.\n
     param arquivo --> Nome do arquivo txt.\n
     return -- > lista de todos os itens.'''
@@ -19,7 +19,7 @@ def emp_dev_ID(presp, pemp=True):
                               Se for Devolução: False.\n
     return --> retorna uma lista com o livro atualizado em -1 ou +1 unidade disponível.'''
     presp -= 1
-    lista_geral = lista_do_arquivo('teste.txt')
+    lista_geral = lista_do_arquivo('Banco Livros.txt')
     for i, registro in enumerate(lista_geral):
         if i == presp:
             if pemp == True:
@@ -98,3 +98,48 @@ def atualizar_livros_emprestados(plista):
            for linha in plista:
                arquivo.write(f'{linha}\n')
 
+def devolucao_livro(pid_user, pid_livro):
+    '''Retirar o livro do nome do usuário no banco de dados.\n
+    param id_user --> ID do usuáro que está devolvendo o livro.\n
+    param id_livro --> ID do livro a ser retirado do usuário.'''
+    found = False
+    livros_temp = ''
+    # GErar lista com todos os empréstimos
+    lista_emprestimos = lista_do_arquivo('Livros emprestados.txt')
+    # Identificar o usuário
+    for indice, linha in enumerate(lista_emprestimos):
+        if int(linha[0]) == pid_user:
+            # Separar a lista dos livros em uma lista
+            livros_emprestados = linha[1].split(',')
+            del livros_emprestados[-1]
+            # Identificar o ID do livro correto
+            for i,livro in enumerate(livros_emprestados):
+                if int(livro) == pid_livro:
+                    # Excluir o ID do livro devolvido do nome do usuario
+                    del livros_emprestados[i]
+                    found = True
+                    break
+            # se encontrado, sai do Loop
+            if found == True:
+                break
+            else:
+                return 0
+    # Gerar uma lista nova, com os livros que sobraram com o usuario
+    for i, livro in enumerate(livros_emprestados):
+        if i == 0:
+            livros_temp = f'{livro},'
+        else:
+            livros_temp = f'{livros_temp}{livro},'
+    # colocar a nova lista na lista principal
+    lista_emprestimos[indice][1] = livros_temp
+    # Registrar a retirada do livro do usuario
+    with open('Livros emprestados.txt', 'w') as arquivo:
+        for linha in lista_emprestimos:
+            arquivo.write(f'{linha[0]};{linha[1]}\n')
+    # Aumentar em 1 a quantidade de livros disponíveis
+    lista_livros = lista_do_arquivo('Banco Livros.txt')
+    lista_livros[pid_livro - 1][2] = str(int(lista_livros[pid_livro - 1][2]) + 1)
+    with open('Banco Livros.txt', 'w') as arquivo:
+        for linha in lista_livros:
+            arquivo.write(f'{linha[0]};{linha[1]};{linha[2]}\n')
+    return 1

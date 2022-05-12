@@ -67,7 +67,7 @@ while True:
             cabecalho('Como deseja identificar o livro ?')
             resp = sub_menu(['Via ID do livro', 'Via código do livro'])
             apagar_console()
-            tamanho = lerArquivoLivros('teste.txt', 'Livros Cadastrados', True)
+            tamanho = lerArquivoLivros('Banco Livros.txt', 'Livros Cadastrados', True)
             sair()
             if resp == 0:
                 break
@@ -101,13 +101,104 @@ while True:
                 else:
                     # Retirar da base dos livros 1 unidade disponível
                     lista_atualizada = emp_dev_ID(id_livro)
-                    atualizar_arquivo_emprestimo('teste.txt', lista_atualizada)
+                    atualizar_arquivo_emprestimo('Banco Livros.txt', lista_atualizada)
                     # Sinalizar que o registro foi feito
                     print('\033[32mRegistro efetuado!\033[m')
             
             # Emprestar novo livro ?
             while True:
                 resp = str(input('Deseja emprestar um novo livro? [S/N] ')).strip().upper()[0]
+                if resp in 'S/N':
+                    break
+                else:
+                    print('Digite uma opção válida!')
+            # Se nao precisar, voltar ao menu principal
+            if resp == 'N':
+                break
+    
+    # Caso o usuário digite 2 o programa irá colocar um novo devolução para o usuário
+    elif escolha == 2: # Criar um registro de devolução
+        while True:
+            ######### IDENTIFICAÇÃO DO USUÁRIO
+            # Como o usuário sera identificado ?
+            apagar_console()
+            cabecalho('Como deseja identificar o usuário? ')
+            resp = sub_menu(['Via ID do usuário', 'Via código do usuário'])
+            if resp == 0:
+                # Voltar ao menu principal
+                break
+            # Mostrar a lista dos users
+            while True:
+                apagar_console()
+                cabecalho('Identificar usuário')
+                tamanho = print_usuarios(True, True)
+                if resp == 0:
+                    # Voltar ao menu principal
+                    break
+                elif resp == 1:
+                    # Identificar usuário pelo ID
+                    while True:
+                        id_user = int(input('Qual o ID do usuário? '))
+                        if id_user >= 0 and id_user <= tamanho:
+                            break
+                        else:
+                            print('Opção inválida, tente novamente!')
+                    break
+                elif resp == 2:
+                    while True:
+                        # Identificar usuário pelo Codigo
+                        id_user = identificar_ID_via_codigo('Users.txt', 'Usuário')
+                        if id_user == -1:
+                            print('Opção inválida, tente novamente!')
+                        else:
+                            break
+                    break
+                else:
+                    print('Opção Inválida, tente novamente!')
+            # Caso digite 0 em algum momento do processo, volta ao Menu Principal
+            if id_user == 0:
+                break
+            
+            apagar_console()
+            cabecalho('Como deseja identificar o livro ?')
+            resp = sub_menu(['Via ID do livro', 'Via código do livro'])
+            apagar_console()
+            tamanho = lerArquivoLivros('Banco Livros.txt', 'Livros Cadastrados', True)
+            sair()
+            if resp == 0:
+                break
+            elif resp == 1: # Devolução livro via ID
+                while True:
+                    id_livro = int(input('Qual o ID do livro a ser devolvido? '))
+                    if id_livro >= 0 and id_livro <= tamanho + 1:
+                        break
+                    else:
+                        print('Opção inválida, tente novamente!')
+            elif resp == 2: # Devolução livro via ID
+                while True:
+                    id_livro = identificar_ID_via_codigo('Banco Livros.txt', 'Livro')
+                    if id_livro == -1:
+                        print('Opção inválida, tente novamente!')
+                    else:
+                        break
+            else:
+                print('Opção inválida, tente novamente!')
+                continue
+            # Ao digitar 0 voltar ao menu principal
+            if id_livro == 0:
+                break
+            
+            # Exclusão do livro no BD
+            while True:
+                resp = devolucao_livro(id_user, id_livro)
+                if resp == 0:
+                    print('Livro não encontrado com o usuário!')
+                else:
+                    print('\033[32mRegistro efetuado!\033[m')
+                break
+                    
+            while True:
+                resp = str(input('Deseja devolver um novo livro? [S/N] ')).strip().upper()[0]
                 if resp in 'S/N':
                     break
                 else:
