@@ -1,5 +1,5 @@
-Deu medo;TER177FUQ;5
-Click;COM158PKS;7
-Olha o susto;SUS849ZLE;2
-Como se fosse a primeira vez;ROM716JHH;5
-Harry potter e a pedra filosofal de todos os deuses existentes;FAN841SCF;10
+Mickey magico;FAN427UXA;7
+Terrorismo no final da rua;TER209HFF;6
+A freira;TER272HUM;0
+Zohan;COM621WMS;13
+Doutor estranho no multiverso da loucura;SUS568EJN;1

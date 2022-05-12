@@ -116,7 +116,7 @@ while True:
             if resp == 'N':
                 break
     
-    # Caso o usuário digite 2 o programa irá colocar um novo devolução para o usuário
+    # Caso o usuário digite 2 o programa irá colocar uma devolução para o usuário
     elif escolha == 2: # Criar um registro de devolução
         while True:
             ######### IDENTIFICAÇÃO DO USUÁRIO
@@ -207,6 +207,33 @@ while True:
             if resp == 'N':
                 break
     
+    # Caso o usuário digite 3 o programa ira listar todos os livros emprestados do usuário
+    elif escolha == 3:
+        while True:
+            apagar_console()
+            nome_livros = lista_do_arquivo('Banco Livros.txt')
+            livros_emprestados = lista_do_arquivo('Livros emprestados.txt')
+            cabecalho('Livros emprestados', 'Mostra quais livros estão com cada usuário')
+            users = lista_do_arquivo('Users.txt')
+            # Localizar o Nome do usuário
+            for registro in livros_emprestados:
+                for id in users:
+                    if registro[0] == id[0]:
+                        nome = id[1]
+                        break
+                print(f'|\033[33m{f"{id[0]}.  {nome}":<118}\033[m|')
+                id_livros = registro[1].split(',')
+                del id_livros[-1]
+                for registro in id_livros:
+                    livro = nome_livros[int(registro)-1][0]
+                    print(f'|\t{livro:<111}|')
+                linha()
+            while True:
+                resp = int(input('Digite "0" para retornar ao menu principal: '))
+                if resp == 0:
+                    break
+            if resp == 0:
+                break
     # Caso o usuário digite 4 o programa ira criar um novo usuario na base de dados
     elif escolha == 4: # Criar um novo usuário
         while True:
