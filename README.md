@@ -1,4 +1,4 @@
-# Python_Software_Biblioteca
+# Python_Software_Biblioteca_V1
 <h1>V1</h1>
 Projeto de um software criado em Python para um controle e registro de dados referente a uma Biblioteca.<br>
 A ideia é para aperfeiçoar e estudar novos modos de realizar operações e manipular outros arquivos com a linguagem Python, utilizando como Banco de Dados arquivos txt e explorando a questão da modularização de arquivos, utilizando defs vindas de outros arquivos principalmente.<br>
